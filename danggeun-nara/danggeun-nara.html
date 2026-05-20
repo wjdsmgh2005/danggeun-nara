@@ -1,0 +1,913 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>당근나라 — 컴퓨터 주변기기</title>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700;900&display=swap" rel="stylesheet">
+<style>
+:root{--p:#1a6fd4;--pd:#1558aa;--pl:#e8f1fd;--pm:#b8d4f7;--ac:#e8392a;--bg:#f4f6fb;--wh:#fff;--bd:#d0daea;--bdl:#e8eef7;--tx:#1a1e2e;--tm:#5a6480;--td:#9aa3bb;--gn:#1a8a4a;--gnb:#e6f5ee;--rd:#e8392a;--rdb:#fdecea;--yw:#d4820a;--ywb:#fdf3e3;--r:6px;--rs:4px}
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:'Noto Sans KR',sans-serif;background:var(--bg);color:var(--tx);font-size:13px}
+::-webkit-scrollbar{width:6px}::-webkit-scrollbar-track{background:var(--bg)}::-webkit-scrollbar-thumb{background:var(--bd);border-radius:3px}
+.topbar{background:var(--pd);color:rgba(255,255,255,.7);font-size:11px;padding:5px 0;text-align:center}
+.topbar a{color:rgba(255,255,255,.85);text-decoration:none;margin:0 8px}
+.topbar a:hover{color:#fff;text-decoration:underline}
+header{background:var(--wh);border-bottom:2px solid var(--p);position:sticky;top:0;z-index:100}
+.header-top{max-width:1200px;margin:0 auto;display:flex;align-items:center;gap:16px;padding:12px 20px}
+.logo{font-size:24px;font-weight:900;color:var(--p);letter-spacing:-1px;cursor:pointer;display:flex;align-items:center;gap:6px}
+.logo-badge{background:var(--p);color:#fff;font-size:9px;font-weight:700;padding:2px 5px;border-radius:3px}
+.sw{flex:1;max-width:560px;display:flex;border:2px solid var(--p);border-radius:var(--r);overflow:hidden}
+.sw select{border:none;border-right:1px solid var(--bd);outline:none;padding:0 10px;background:var(--pl);color:var(--p);font-size:12px;font-weight:500;cursor:pointer;font-family:inherit}
+.sw input{flex:1;border:none;outline:none;padding:10px 12px;font-size:13px;color:var(--tx);font-family:inherit}
+.sw input::placeholder{color:var(--td)}
+.sbtn{background:var(--p);border:none;padding:0 18px;color:#fff;font-size:13px;font-weight:700;cursor:pointer}
+.sbtn:hover{background:var(--pd)}
+.ha{display:flex;align-items:center;gap:8px;margin-left:auto}
+.btn{padding:7px 14px;border-radius:var(--rs);font-size:12px;font-weight:500;cursor:pointer;border:none;font-family:inherit;transition:all .15s;white-space:nowrap}
+.bo{background:var(--wh);border:1px solid var(--bd);color:var(--tm)}
+.bo:hover{border-color:var(--p);color:var(--p)}
+.bp{background:var(--p);color:#fff}
+.bsl{background:var(--ac);color:#fff;font-weight:700}
+.bsl:hover{background:#c42d20}
+nav{background:var(--p)}
+.ni{max-width:1200px;margin:0 auto;display:flex;align-items:center}
+.nv{color:rgba(255,255,255,.85);font-size:13px;font-weight:500;padding:9px 16px;cursor:pointer;white-space:nowrap;border-bottom:3px solid transparent;transition:all .15s}
+.nv:hover{background:rgba(255,255,255,.15);color:#fff}
+.nv.active{background:rgba(255,255,255,.2);color:#fff;border-bottom-color:#fff;font-weight:700}
+.nd{width:1px;height:20px;background:rgba(255,255,255,.2);margin:0 2px}
+.wrap{max-width:1200px;margin:0 auto;padding:16px 20px;display:flex;gap:16px}
+.sb{width:180px;flex-shrink:0}
+.sbox{background:var(--wh);border:1px solid var(--bd);border-radius:var(--r);margin-bottom:12px;overflow:hidden}
+.stit{background:var(--p);color:#fff;font-size:12px;font-weight:700;padding:8px 12px}
+.sl{display:flex;align-items:center;justify-content:space-between;padding:8px 12px;color:var(--tm);font-size:12px;cursor:pointer;border-top:1px solid var(--bdl);transition:all .12s}
+.sl:hover{background:var(--pl);color:var(--p)}
+.sl.active{background:var(--pl);color:var(--p);font-weight:700}
+.sc{font-size:10px;color:var(--td)}
+main{flex:1;min-width:0}
+.page{display:none}
+.page.active{display:block}
+.nb{background:var(--ywb);border:1px solid #f5d08a;border-radius:var(--r);padding:8px 14px;margin-bottom:12px;font-size:12px;color:var(--yw)}
+.tb{background:var(--wh);border:1px solid var(--bd);border-radius:var(--r);padding:10px 14px;margin-bottom:12px;display:flex;align-items:center;gap:10px;flex-wrap:wrap}
+.tl{font-size:12px;color:var(--tm);font-weight:500}
+.fc{padding:4px 10px;border-radius:12px;border:1px solid var(--bd);font-size:11px;color:var(--tm);cursor:pointer;background:var(--wh);transition:all .12s}
+.fc:hover{border-color:var(--p);color:var(--p)}
+.fc.on{background:var(--p);border-color:var(--p);color:#fff}
+.tr2{margin-left:auto;display:flex;align-items:center;gap:8px}
+.ss{border:1px solid var(--bd);border-radius:var(--rs);padding:5px 8px;font-size:12px;color:var(--tm);background:var(--wh);outline:none;cursor:pointer;font-family:inherit}
+.cl{font-size:12px;color:var(--tm)}
+.cl strong{color:var(--p);font-weight:700}
+.pt{background:var(--wh);border:1px solid var(--bd);border-radius:var(--r);overflow:hidden}
+.th{display:grid;grid-template-columns:64px 1fr 140px 90px 70px 80px;background:var(--pl);border-bottom:2px solid var(--bd);padding:8px 14px;font-size:11px;font-weight:700;color:var(--p);gap:10px;align-items:center}
+.tr{display:grid;grid-template-columns:64px 1fr 140px 90px 70px 80px;padding:10px 14px;border-bottom:1px solid var(--bdl);gap:10px;align-items:center;cursor:pointer;transition:background .12s}
+.tr:hover{background:var(--pl)}
+.tr:last-child{border-bottom:none}
+.thumb{width:56px;height:56px;border-radius:var(--rs);border:1px solid var(--bd);overflow:hidden;flex-shrink:0;background:var(--bg);display:flex;align-items:center;justify-content:center}
+.thumb svg{width:56px;height:56px}
+.ii{min-width:0}
+.it{font-size:13px;font-weight:500;color:var(--tx);overflow:hidden;text-overflow:ellipsis;white-space:nowrap;margin-bottom:3px}
+.itags{display:flex;gap:4px;flex-wrap:wrap}
+.tag{font-size:10px;padding:1px 6px;border-radius:3px;font-weight:500}
+.tn{background:var(--pl);color:var(--p)}
+.ts{background:var(--rdb);color:var(--rd)}
+.tng{background:var(--gnb);color:var(--gn)}
+.tu{background:#f0f0f0;color:var(--tm)}
+.sc2{display:flex;flex-direction:column;gap:2px}
+.sn{font-size:12px;font-weight:500;color:var(--tm)}
+.sloc{font-size:11px;color:var(--td)}
+.pc{font-size:14px;font-weight:700;color:var(--rd);white-space:nowrap}
+.pn{font-size:10px;color:var(--gn);font-weight:500}
+.vc{font-size:11px;color:var(--td)}
+.tc{font-size:11px;color:var(--td)}
+.pg{display:flex;align-items:center;justify-content:center;gap:4px;padding:16px;border-top:1px solid var(--bdl)}
+.pb{width:28px;height:28px;border-radius:var(--rs);border:1px solid var(--bd);background:var(--wh);font-size:12px;color:var(--tm);cursor:pointer;display:flex;align-items:center;justify-content:center}
+.pb:hover{border-color:var(--p);color:var(--p)}
+.pb.active{background:var(--p);border-color:var(--p);color:#fff;font-weight:700}
+#page-detail{background:var(--wh);border:1px solid var(--bd);border-radius:var(--r);padding:20px}
+.bb{display:flex;align-items:center;gap:4px;color:var(--tm);font-size:12px;cursor:pointer;margin-bottom:16px;width:fit-content}
+.bb:hover{color:var(--p)}
+.bc{font-size:11px;color:var(--td);margin-bottom:16px}
+.bc span{color:var(--p)}
+.dl{display:flex;gap:24px}
+.dim{width:380px;flex-shrink:0}
+.dmi{width:100%;aspect-ratio:1;border:1px solid var(--bd);border-radius:var(--r);overflow:hidden;margin-bottom:8px;display:flex;align-items:center;justify-content:center;background:var(--bg)}
+.dmi svg{width:100%;height:100%}
+.dts{display:flex;gap:6px}
+.dt{width:60px;height:60px;border:2px solid var(--bd);border-radius:var(--rs);cursor:pointer;overflow:hidden;flex-shrink:0;display:flex;align-items:center;justify-content:center;background:var(--bg)}
+.dt.active{border-color:var(--p)}
+.dt svg{width:56px;height:56px}
+.dinf{flex:1;min-width:0}
+.dst{display:flex;align-items:center;gap:8px;margin-bottom:8px}
+.dsb{font-size:11px;font-weight:700;padding:3px 8px;border-radius:3px}
+.dss{background:var(--gnb);color:var(--gn)}
+.dsd{background:var(--rdb);color:var(--rd)}
+.dth{font-size:18px;font-weight:700;color:var(--tx);line-height:1.4;margin-bottom:12px}
+.dpr{display:flex;align-items:baseline;gap:8px;margin-bottom:16px;padding-bottom:16px;border-bottom:1px solid var(--bdl)}
+.dp{font-size:26px;font-weight:900;color:var(--rd)}
+.dng{font-size:12px;color:var(--gn);font-weight:600}
+.dmt{width:100%;border-collapse:collapse;margin-bottom:16px;font-size:13px}
+.dmt tr{border-top:1px solid var(--bdl)}
+.dmt td:first-child{width:90px;color:var(--tm);font-weight:500;padding:8px 0}
+.dmt td:last-child{color:var(--tx);padding:8px 0}
+.dsb2{background:var(--pl);border:1px solid var(--pm);border-radius:var(--r);padding:12px;margin-bottom:16px;display:flex;align-items:center;gap:12px}
+.sav{width:42px;height:42px;border-radius:50%;background:var(--p);display:flex;align-items:center;justify-content:center;color:#fff;font-size:16px;font-weight:700;flex-shrink:0}
+.snm{font-size:14px;font-weight:700;color:var(--tx)}
+.sst{font-size:11px;color:var(--tm);margin-top:2px}
+.sr{font-size:11px;color:var(--yw);font-weight:600;margin-top:2px}
+.dde{background:var(--bg);border:1px solid var(--bd);border-radius:var(--r);padding:14px;font-size:13px;line-height:1.8;color:var(--tm);margin-bottom:16px}
+.dac{display:flex;gap:8px}
+.bcb{flex:1;background:var(--p);color:#fff;border:none;padding:12px;border-radius:var(--r);font-size:14px;font-weight:700;cursor:pointer;font-family:inherit}
+.bcb:hover{background:var(--pd)}
+.bwb{background:var(--wh);border:1px solid var(--bd);border-radius:var(--r);padding:12px 16px;font-size:18px;cursor:pointer}
+.bwb:hover{border-color:var(--rd)}
+#page-sell{background:var(--wh);border:1px solid var(--bd);border-radius:var(--r);padding:20px}
+.sth{font-size:16px;font-weight:700;color:var(--p);border-bottom:2px solid var(--p);padding-bottom:10px;margin-bottom:20px}
+.fr{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:16px}
+.fg{margin-bottom:16px}
+.fl{display:block;font-size:12px;font-weight:700;color:var(--tm);margin-bottom:5px}
+.fl .rq{color:var(--rd)}
+.fi,.fsel,.fta{width:100%;border:1px solid var(--bd);border-radius:var(--rs);padding:9px 12px;font-size:13px;color:var(--tx);outline:none;font-family:inherit;background:var(--wh);transition:border-color .15s}
+.fi:focus,.fsel:focus,.fta:focus{border-color:var(--p)}
+.fi::placeholder,.fta::placeholder{color:var(--td)}
+.fta{resize:vertical;min-height:120px;line-height:1.7}
+.ia{width:72px;height:72px;border:2px dashed var(--bd);border-radius:var(--rs);display:flex;flex-direction:column;align-items:center;justify-content:center;cursor:pointer;color:var(--td);font-size:10px;gap:3px}
+.ia:hover{border-color:var(--p);color:var(--p)}
+.ia .pl{font-size:22px;line-height:1}
+.pur{display:flex;align-items:center;gap:8px}
+.pu{font-size:13px;font-weight:700;color:var(--tm)}
+.nr{display:flex;align-items:center;gap:6px;margin-top:6px}
+.nr input{accent-color:var(--p)}
+.nr label{font-size:12px;color:var(--tm);cursor:pointer}
+.fsub{background:var(--p);color:#fff;border:none;width:100%;padding:13px;border-radius:var(--rs);font-size:14px;font-weight:700;cursor:pointer;font-family:inherit;margin-top:8px}
+.fsub:hover{background:var(--pd)}
+#page-chat{display:none}
+#page-chat.active{display:flex}
+.cw{background:var(--wh);border:1px solid var(--bd);border-radius:var(--r);display:flex;overflow:hidden;height:calc(100vh - 185px);width:100%}
+.clp{width:260px;border-right:1px solid var(--bd);flex-shrink:0;display:flex;flex-direction:column}
+.clh{background:var(--p);color:#fff;padding:12px 14px;font-size:14px;font-weight:700}
+.ci2{flex:1;overflow-y:auto}
+.ci{display:flex;align-items:center;gap:10px;padding:10px 12px;border-bottom:1px solid var(--bdl);cursor:pointer;transition:background .12s}
+.ci:hover,.ci.active{background:var(--pl)}
+.cav{width:38px;height:38px;border-radius:50%;background:var(--pl);border:1px solid var(--pm);display:flex;align-items:center;justify-content:center;font-size:14px;flex-shrink:0;color:var(--p);font-weight:700}
+.cnf{flex:1;min-width:0}
+.cnm{font-size:12px;font-weight:700;margin-bottom:2px}
+.cpv{font-size:11px;color:var(--td);overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.ctm{font-size:10px;color:var(--td);flex-shrink:0}
+.cud{width:16px;height:16px;background:var(--rd);border-radius:50%;color:#fff;font-size:9px;font-weight:700;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.cmp{flex:1;display:flex;flex-direction:column}
+.crh{background:var(--pl);border-bottom:1px solid var(--bd);padding:10px 14px;display:flex;align-items:center;gap:10px}
+.cpt{width:38px;height:38px;border-radius:var(--rs);border:1px solid var(--bd);overflow:hidden;background:var(--bg);flex-shrink:0;display:flex;align-items:center;justify-content:center}
+.cpt svg{width:38px;height:38px}
+.cpn{font-size:13px;font-weight:700;color:var(--tx)}
+.cpp{font-size:12px;color:var(--rd);font-weight:700}
+.cms{flex:1;overflow-y:auto;padding:14px;display:flex;flex-direction:column;gap:10px;background:#f8fafd}
+.msg{display:flex;gap:7px;max-width:75%}
+.msg.me{flex-direction:row-reverse;margin-left:auto}
+.mav{width:28px;height:28px;border-radius:50%;background:var(--pl);border:1px solid var(--pm);display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700;color:var(--p);flex-shrink:0;align-self:flex-end}
+.mb{padding:8px 12px;border-radius:12px;font-size:12px;line-height:1.6}
+.msg .mb{background:var(--wh);border:1px solid var(--bd);border-bottom-left-radius:3px;color:var(--tx)}
+.msg.me .mb{background:var(--p);color:#fff;border:none;border-bottom-right-radius:3px}
+.mt{font-size:10px;color:var(--td);align-self:flex-end}
+.cir{padding:10px 12px;border-top:1px solid var(--bd);display:flex;gap:8px;align-items:flex-end;background:var(--wh)}
+.cib{flex:1;border:1px solid var(--bd);border-radius:var(--rs);padding:8px 12px;font-size:13px;color:var(--tx);font-family:inherit;outline:none;resize:none;max-height:80px}
+.cib:focus{border-color:var(--p)}
+.csb{background:var(--p);border:none;padding:8px 14px;border-radius:var(--rs);color:#fff;font-size:13px;font-weight:700;cursor:pointer;font-family:inherit;white-space:nowrap}
+.csb:hover{background:var(--pd)}
+#page-profile{background:var(--wh);border:1px solid var(--bd);border-radius:var(--r);overflow:hidden}
+.pb2{background:var(--p);padding:24px 20px;display:flex;align-items:center;gap:16px}
+.pab{width:64px;height:64px;border-radius:50%;background:rgba(255,255,255,.25);border:3px solid rgba(255,255,255,.5);display:flex;align-items:center;justify-content:center;font-size:28px;font-weight:900;color:#fff;flex-shrink:0}
+.pnh{font-size:18px;font-weight:900;color:#fff;margin-bottom:4px}
+.psh{font-size:12px;color:rgba(255,255,255,.75)}
+.pbd{padding:16px 20px}
+.pst{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-bottom:20px}
+.ps{background:var(--pl);border:1px solid var(--pm);border-radius:var(--r);padding:12px;text-align:center}
+.psn{font-size:22px;font-weight:900;color:var(--p)}
+.psl{font-size:11px;color:var(--tm);margin-top:2px}
+.tnv{display:flex;border-bottom:2px solid var(--bd);margin-bottom:16px}
+.tb2{padding:9px 16px;font-size:13px;font-weight:500;color:var(--tm);cursor:pointer;border-bottom:2px solid transparent;margin-bottom:-2px}
+.tb2.active{color:var(--p);border-bottom-color:var(--p);font-weight:700}
+#page-wishlist{background:var(--wh);border:1px solid var(--bd);border-radius:var(--r);padding:20px}
+.wt{font-size:15px;font-weight:700;color:var(--p);border-bottom:2px solid var(--p);padding-bottom:8px;margin-bottom:14px}
+#page-notice{background:var(--wh);border:1px solid var(--bd);border-radius:var(--r);overflow:hidden}
+.nhh{background:var(--p);color:#fff;padding:12px 16px;font-size:14px;font-weight:700}
+.nti{display:flex;align-items:flex-start;gap:10px;padding:12px 16px;border-bottom:1px solid var(--bdl);cursor:pointer;transition:background .12s}
+.nti:hover{background:var(--pl)}
+.nti.unread{border-left:3px solid var(--p)}
+.nic{font-size:18px;flex-shrink:0;padding-top:2px}
+.ntx{flex:1;font-size:12px;color:var(--tm);line-height:1.6}
+.ntx strong{color:var(--tx)}
+.ntm{font-size:10px;color:var(--td);white-space:nowrap}
+.mbg{display:none;position:fixed;inset:0;background:rgba(0,0,0,.5);z-index:200;align-items:center;justify-content:center}
+.mbg.open{display:flex}
+.modal{background:var(--wh);border-radius:var(--r);width:360px;overflow:hidden;box-shadow:0 8px 32px rgba(0,0,0,.2)}
+.mh{background:var(--p);color:#fff;padding:16px 20px;display:flex;align-items:center;justify-content:space-between}
+.mh h2{font-size:16px;font-weight:700}
+.mc{background:none;border:none;color:rgba(255,255,255,.7);font-size:20px;cursor:pointer;line-height:1}
+.mc:hover{color:#fff}
+.mts{display:flex;border-bottom:2px solid var(--bd)}
+.mt2{flex:1;padding:10px;text-align:center;cursor:pointer;font-size:13px;font-weight:500;color:var(--tm);border-bottom:2px solid transparent;margin-bottom:-2px}
+.mt2.active{color:var(--p);border-bottom-color:var(--p);font-weight:700}
+.mbd{padding:20px}
+.sb2{display:flex;flex-direction:column;gap:8px;margin-top:14px}
+.soc{width:100%;padding:10px;border-radius:var(--rs);font-size:13px;font-weight:600;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:8px;font-family:inherit;border:none}
+.soc:hover{opacity:.88}
+.kk{background:#fee500;color:#3c1e1e}
+.nv2{background:#03c75a;color:#fff}
+.dv{display:flex;align-items:center;gap:8px;margin:12px 0;color:var(--td);font-size:11px}
+.dv::before,.dv::after{content:'';flex:1;height:1px;background:var(--bd)}
+.toast{position:fixed;bottom:20px;left:50%;transform:translateX(-50%) translateY(60px);background:var(--tx);color:#fff;padding:10px 20px;border-radius:20px;font-size:13px;z-index:300;white-space:nowrap;transition:transform .3s;box-shadow:0 4px 16px rgba(0,0,0,.2)}
+.toast.show{transform:translateX(-50%) translateY(0)}
+.em{text-align:center;padding:48px 16px;color:var(--td)}
+.em-ic{font-size:40px;margin-bottom:8px}
+.rs{width:200px;flex-shrink:0}
+.ab{background:var(--wh);border:1px solid var(--bd);border-radius:var(--r);padding:12px;margin-bottom:12px}
+.at{font-size:11px;font-weight:700;color:var(--tm);margin-bottom:8px;border-bottom:1px solid var(--bdl);padding-bottom:6px}
+.hi{display:flex;align-items:center;gap:8px;padding:5px 0;border-bottom:1px solid var(--bdl);cursor:pointer}
+.hi:last-child{border-bottom:none}
+.ht{width:36px;height:36px;border-radius:var(--rs);border:1px solid var(--bd);overflow:hidden;flex-shrink:0;background:var(--bg);display:flex;align-items:center;justify-content:center}
+.ht svg{width:36px;height:36px}
+.hin{min-width:0}
+.hnm{font-size:11px;color:var(--tx);overflow:hidden;text-overflow:ellipsis;white-space:nowrap;margin-bottom:2px}
+.hpr{font-size:11px;font-weight:700;color:var(--rd)}
+</style>
+</head>
+<body>
+
+<div class="topbar">
+  <a href="#" onclick="toast('고객센터')">고객센터</a>
+  <a href="#" onclick="toast('공지사항')">공지사항</a>
+  <a href="#" onclick="toast('이용약관')">이용약관</a>
+  <a href="#" onclick="toast('사기피해예방')">사기피해예방</a>
+  <span style="margin-left:16px;color:rgba(255,255,255,.4)">|</span>
+  <a href="#" onclick="openLogin()">로그인</a>
+  <a href="#" onclick="openLogin()">회원가입</a>
+</div>
+
+<header>
+  <div class="header-top">
+    <div class="logo" onclick="nav('home')">당근나라 <span class="logo-badge">PC</span></div>
+    <div class="sw">
+      <select><option>전체</option><option>CPU</option><option>그래픽카드</option><option>메모리</option><option>마우스</option><option>키보드</option><option>모니터</option><option>헤드셋</option></select>
+      <input type="text" id="sinput" placeholder="컴퓨터 주변기기를 검색해보세요" oninput="search(this.value)">
+      <button class="sbtn" onclick="search(document.getElementById('sinput').value)">검색</button>
+    </div>
+    <div class="ha">
+      <button class="btn bo" onclick="nav('notice')">🔔 알림</button>
+      <button class="btn bo" onclick="nav('chat')">💬 채팅</button>
+      <button class="btn bo" onclick="openLogin()">로그인</button>
+      <button class="btn bsl" onclick="nav('sell')">+ 판매하기</button>
+    </div>
+  </div>
+  <nav>
+    <div class="ni">
+      <div class="nv active" onclick="nav('home');setNav(this)">🏠 홈</div>
+      <div class="nd"></div>
+      <div class="nv" onclick="filterCat('CPU/메인보드');setNav(this)">CPU/메인보드</div>
+      <div class="nv" onclick="filterCat('그래픽카드');setNav(this)">그래픽카드</div>
+      <div class="nv" onclick="filterCat('메모리/SSD');setNav(this)">메모리/SSD</div>
+      <div class="nv" onclick="filterCat('마우스');setNav(this)">마우스</div>
+      <div class="nv" onclick="filterCat('키보드');setNav(this)">키보드</div>
+      <div class="nv" onclick="filterCat('모니터');setNav(this)">모니터</div>
+      <div class="nv" onclick="filterCat('헤드셋');setNav(this)">헤드셋</div>
+    </div>
+  </nav>
+</header>
+
+<div class="wrap">
+  <aside class="sb">
+    <div class="sbox">
+      <div class="stit">📁 카테고리</div>
+      <div class="sl active" onclick="filterCat('전체');setSA(this)">전체 <span class="sc">247</span></div>
+      <div class="sl" onclick="filterCat('CPU/메인보드');setSA(this)">CPU/메인보드 <span class="sc">38</span></div>
+      <div class="sl" onclick="filterCat('그래픽카드');setSA(this)">그래픽카드 <span class="sc">54</span></div>
+      <div class="sl" onclick="filterCat('메모리/SSD');setSA(this)">메모리/SSD <span class="sc">41</span></div>
+      <div class="sl" onclick="filterCat('마우스');setSA(this)">마우스 <span class="sc">29</span></div>
+      <div class="sl" onclick="filterCat('키보드');setSA(this)">키보드 <span class="sc">33</span></div>
+      <div class="sl" onclick="filterCat('모니터');setSA(this)">모니터 <span class="sc">22</span></div>
+      <div class="sl" onclick="filterCat('헤드셋');setSA(this)">헤드셋 <span class="sc">18</span></div>
+    </div>
+    <div class="sbox">
+      <div class="stit">👤 내 메뉴</div>
+      <div class="sl" onclick="nav('profile')">내 정보</div>
+      <div class="sl" onclick="nav('sell')">판매 등록</div>
+      <div class="sl" onclick="nav('wishlist')">관심 목록</div>
+      <div class="sl" onclick="nav('chat')">채팅 목록</div>
+      <div class="sl" onclick="nav('notice')">알림</div>
+    </div>
+  </aside>
+
+  <main>
+    <!-- HOME -->
+    <div id="page-home" class="page active">
+      <div class="nb">⚠️ <strong>[주의]</strong> 직거래 시 안전한 장소에서 거래하시고, 선입금 요구는 사기일 수 있습니다.</div>
+      <div class="tb">
+        <span class="tl">상태:</span>
+        <div class="fc on" onclick="this.classList.toggle('on')">전체</div>
+        <div class="fc" onclick="this.classList.toggle('on')">판매중</div>
+        <div class="fc" onclick="this.classList.toggle('on')">거래완료</div>
+        <span class="tl" style="margin-left:8px">거래:</span>
+        <div class="fc" onclick="this.classList.toggle('on')">직거래</div>
+        <div class="fc" onclick="this.classList.toggle('on')">택배</div>
+        <div class="fc" onclick="this.classList.toggle('on')">협의가능</div>
+        <div class="tr2">
+          <span class="cl">총 <strong id="cnt">12</strong>개</span>
+          <select class="ss" onchange="sort(this.value)">
+            <option value="r">최신순</option>
+            <option value="pa">낮은 가격순</option>
+            <option value="pd">높은 가격순</option>
+            <option value="v">조회수순</option>
+          </select>
+        </div>
+      </div>
+      <div class="pt">
+        <div class="th"><div>사진</div><div>제목 / 상태</div><div>판매자</div><div>가격</div><div>조회</div><div>등록일</div></div>
+        <div id="plist"></div>
+        <div class="pg">
+          <button class="pb">◀</button>
+          <button class="pb active">1</button>
+          <button class="pb">2</button>
+          <button class="pb">3</button>
+          <button class="pb">▶</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- DETAIL -->
+    <div id="page-detail" class="page">
+      <div class="bb" onclick="nav('home')">◀ 목록으로</div>
+      <div id="dcon"></div>
+    </div>
+
+    <!-- SELL -->
+    <div id="page-sell" class="page">
+      <div class="sth">📝 판매 등록</div>
+      <div class="fg"><label class="fl">상품 사진 <span class="rq">*</span></label><div class="ia" onclick="toast('사진 추가 (데모)')"><div class="pl">+</div><div>사진추가</div></div></div>
+      <div class="fr">
+        <div class="fg" style="margin-bottom:0"><label class="fl">카테고리 <span class="rq">*</span></label><select class="fsel"><option value="">선택</option><option>CPU/메인보드</option><option>그래픽카드</option><option>메모리/SSD</option><option>마우스</option><option>키보드</option><option>모니터</option><option>헤드셋</option><option>기타</option></select></div>
+        <div class="fg" style="margin-bottom:0"><label class="fl">상품 상태 <span class="rq">*</span></label><select class="fsel"><option>미개봉</option><option>거의 새것</option><option>상태 좋음</option><option>상태 보통</option></select></div>
+      </div>
+      <div class="fg"><label class="fl">제목 <span class="rq">*</span></label><input class="fi" type="text" id="stitle" placeholder="예) 로지텍 G502X PLUS 무선 마우스 판매합니다"></div>
+      <div class="fg">
+        <label class="fl">가격 <span class="rq">*</span></label>
+        <div class="pur"><input class="fi" type="number" id="sprice" placeholder="0" style="width:200px"><span class="pu">원</span></div>
+        <div class="nr"><input type="checkbox" id="snego"><label for="snego">가격 협의 가능</label></div>
+      </div>
+      <div class="fr">
+        <div class="fg" style="margin-bottom:0"><label class="fl">거래 방식</label><select class="fsel"><option>직거래</option><option>택배</option><option>직거래+택배</option></select></div>
+        <div class="fg" style="margin-bottom:0"><label class="fl">거래 지역</label><input class="fi" type="text" placeholder="예) 서울 강남구"></div>
+      </div>
+      <div class="fg" style="margin-top:16px"><label class="fl">상세 설명 <span class="rq">*</span></label><textarea class="fta" id="sdesc" placeholder="상품 상태, 구매 시기, 사용 기간, 판매 이유 등을 자세히 적어주세요."></textarea></div>
+      <button class="fsub" onclick="doSell()">등록하기</button>
+    </div>
+
+    <!-- CHAT -->
+    <div id="page-chat" class="page">
+      <div class="cw">
+        <div class="clp">
+          <div class="clh">💬 채팅 목록</div>
+          <div class="ci2" id="clist"></div>
+        </div>
+        <div class="cmp">
+          <div class="crh" id="crh"></div>
+          <div class="cms" id="cmsgs"></div>
+          <div class="cir">
+            <textarea class="cib" id="cinput" placeholder="메시지를 입력하세요..." rows="1" onkeydown="if(event.key==='Enter'&&!event.shiftKey){event.preventDefault();sendMsg();}"></textarea>
+            <button class="csb" onclick="sendMsg()">전송</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- PROFILE -->
+    <div id="page-profile" class="page">
+      <div class="pb2">
+        <div class="pab">나</div>
+        <div>
+          <div class="pnh">판교동 거래왕</div>
+          <div class="psh">📍 경기 성남시 분당구 · 가입 2023.03</div>
+          <div style="margin-top:6px;display:flex;gap:6px">
+            <span style="background:rgba(255,255,255,.2);color:#fff;font-size:11px;padding:3px 8px;border-radius:3px">⭐ 매너온도 42.5°</span>
+            <span style="background:rgba(255,255,255,.2);color:#fff;font-size:11px;padding:3px 8px;border-radius:3px">인증회원</span>
+          </div>
+        </div>
+        <button class="btn bo" style="margin-left:auto;background:rgba(255,255,255,.15);color:#fff;border-color:rgba(255,255,255,.3)" onclick="toast('프로필 수정')">수정</button>
+      </div>
+      <div class="pbd">
+        <div class="pst">
+          <div class="ps"><div class="psn">23</div><div class="psl">판매 완료</div></div>
+          <div class="ps"><div class="psn">7</div><div class="psl">구매 완료</div></div>
+          <div class="ps"><div class="psn">4.9</div><div class="psl">거래 평점</div></div>
+          <div class="ps"><div class="psn">142</div><div class="psl">관심 받음</div></div>
+        </div>
+        <div class="tnv">
+          <div class="tb2 active" onclick="setTab(this)">판매중</div>
+          <div class="tb2" onclick="setTab(this)">거래완료</div>
+          <div class="tb2" onclick="setTab(this)">받은 후기</div>
+        </div>
+        <div class="pt">
+          <div class="th"><div>사진</div><div>제목</div><div>판매자</div><div>가격</div><div>조회</div><div>등록일</div></div>
+          <div id="prolist"></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- WISHLIST -->
+    <div id="page-wishlist" class="page">
+      <div class="wt">❤️ 관심 목록</div>
+      <div class="pt">
+        <div class="th"><div>사진</div><div>제목</div><div>판매자</div><div>가격</div><div>조회</div><div>등록일</div></div>
+        <div id="wlist"></div>
+      </div>
+    </div>
+
+    <!-- NOTICE -->
+    <div id="page-notice" class="page"><div id="notel"></div></div>
+  </main>
+
+  <div class="rs">
+    <div class="ab"><div class="at">🔥 인기 매물</div><div id="hotl"></div></div>
+    <div class="ab">
+      <div class="at">📢 유의사항</div>
+      <div style="font-size:11px;color:var(--tm);line-height:1.9">· 직거래 시 공공장소 이용<br>· 선입금 요구는 사기 의심<br>· 결제 전 상품 상태 확인<br>· 사기 발생 시 경찰 신고<br>· 허위 매물 신고 기능 이용</div>
+    </div>
+  </div>
+</div>
+
+<!-- LOGIN MODAL -->
+<div class="mbg" id="lmodal" onclick="if(event.target===this)closeLogin()">
+  <div class="modal">
+    <div class="mh"><h2>당근나라 PC 로그인</h2><button class="mc" onclick="closeLogin()">✕</button></div>
+    <div class="mts">
+      <div class="mt2 active" onclick="setMT(this,'ml')">로그인</div>
+      <div class="mt2" onclick="setMT(this,'ms')">회원가입</div>
+    </div>
+    <div class="mbd">
+      <div id="ml">
+        <div class="fg"><label class="fl">이메일</label><input class="fi" type="email" placeholder="example@email.com"></div>
+        <div class="fg"><label class="fl">비밀번호</label><input class="fi" type="password" placeholder="비밀번호 입력"></div>
+        <button class="fsub" style="margin-top:0" onclick="doLogin()">로그인</button>
+        <div class="dv">또는</div>
+        <div class="sb2">
+          <button class="soc kk" onclick="doLogin()">🟡 카카오로 시작하기</button>
+          <button class="soc nv2" onclick="doLogin()">N 네이버로 시작하기</button>
+        </div>
+      </div>
+      <div id="ms" style="display:none">
+        <div class="fg"><label class="fl">이름</label><input class="fi" type="text" placeholder="이름"></div>
+        <div class="fg"><label class="fl">이메일</label><input class="fi" type="email" placeholder="이메일"></div>
+        <div class="fg"><label class="fl">비밀번호</label><input class="fi" type="password" placeholder="8자 이상"></div>
+        <div class="fg"><label class="fl">지역</label><input class="fi" type="text" placeholder="예) 서울 강남구"></div>
+        <button class="fsub" style="margin-top:0" onclick="doLogin()">가입하기</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="toast" id="toastel"></div>
+
+<script>
+// ── SVG 일러스트 (12종) ──
+const SVGS = {
+  gpu: `<svg viewBox="0 0 56 56" xmlns="http://www.w3.org/2000/svg">
+    <rect width="56" height="56" fill="#e8f1fd"/>
+    <rect x="6" y="16" width="44" height="26" rx="3" fill="#1a6fd4"/>
+    <rect x="10" y="20" width="28" height="18" rx="2" fill="#0d3f7a"/>
+    <rect x="11" y="21" width="26" height="16" rx="1" fill="#1a2540"/>
+    <rect x="13" y="23" width="10" height="10" rx="1" fill="#4a9eff"/>
+    <rect x="25" y="23" width="5" height="10" rx="1" fill="#2a6fd4"/>
+    <rect x="31" y="23" width="5" height="10" rx="1" fill="#2a6fd4"/>
+    <rect x="40" y="20" width="8" height="5" rx="1" fill="#4a9eff"/>
+    <rect x="40" y="27" width="8" height="5" rx="1" fill="#4a9eff"/>
+    <rect x="8" y="42" width="4" height="6" rx="1" fill="#0d3f7a"/>
+    <rect x="14" y="42" width="4" height="6" rx="1" fill="#0d3f7a"/>
+    <rect x="20" y="42" width="4" height="6" rx="1" fill="#0d3f7a"/>
+    <rect x="26" y="42" width="4" height="6" rx="1" fill="#0d3f7a"/>
+  </svg>`,
+  mouse: `<svg viewBox="0 0 56 56" xmlns="http://www.w3.org/2000/svg">
+    <rect width="56" height="56" fill="#e8f1fd"/>
+    <ellipse cx="28" cy="30" rx="14" ry="18" fill="#1a6fd4"/>
+    <ellipse cx="28" cy="24" rx="14" ry="12" fill="#2a80e8"/>
+    <line x1="28" y1="14" x2="28" y2="34" stroke="#0d3f7a" stroke-width="1.5"/>
+    <ellipse cx="28" cy="20" rx="3" ry="4" fill="#fff" opacity=".5"/>
+    <rect x="22" y="38" width="12" height="3" rx="1.5" fill="#0d3f7a"/>
+    <circle cx="28" cy="22" r="2" fill="#fff" opacity=".8"/>
+  </svg>`,
+  keyboard: `<svg viewBox="0 0 56 56" xmlns="http://www.w3.org/2000/svg">
+    <rect width="56" height="56" fill="#e8f1fd"/>
+    <rect x="4" y="17" width="48" height="26" rx="3" fill="#1a6fd4"/>
+    <rect x="6" y="19" width="44" height="22" rx="2" fill="#0d3f7a"/>
+    <rect x="8" y="21" width="5" height="4" rx="1" fill="#4a9eff"/>
+    <rect x="15" y="21" width="5" height="4" rx="1" fill="#4a9eff"/>
+    <rect x="22" y="21" width="5" height="4" rx="1" fill="#4a9eff"/>
+    <rect x="29" y="21" width="5" height="4" rx="1" fill="#4a9eff"/>
+    <rect x="36" y="21" width="5" height="4" rx="1" fill="#4a9eff"/>
+    <rect x="43" y="21" width="5" height="4" rx="1" fill="#4a9eff"/>
+    <rect x="8" y="27" width="5" height="4" rx="1" fill="#4a9eff"/>
+    <rect x="15" y="27" width="5" height="4" rx="1" fill="#4a9eff"/>
+    <rect x="22" y="27" width="5" height="4" rx="1" fill="#4a9eff"/>
+    <rect x="29" y="27" width="5" height="4" rx="1" fill="#4a9eff"/>
+    <rect x="36" y="27" width="5" height="4" rx="1" fill="#4a9eff"/>
+    <rect x="43" y="27" width="5" height="4" rx="1" fill="#4a9eff"/>
+    <rect x="12" y="33" width="32" height="4" rx="1" fill="#4a9eff"/>
+  </svg>`,
+  monitor: `<svg viewBox="0 0 56 56" xmlns="http://www.w3.org/2000/svg">
+    <rect width="56" height="56" fill="#e8f1fd"/>
+    <rect x="4" y="8" width="48" height="32" rx="3" fill="#0d3f7a"/>
+    <rect x="6" y="10" width="44" height="28" rx="2" fill="#1a2540"/>
+    <rect x="8" y="12" width="40" height="24" rx="1" fill="#0a1628"/>
+    <rect x="10" y="14" width="36" height="20" rx="1" fill="#1a6fd4" opacity=".3"/>
+    <rect x="12" y="16" width="32" height="4" rx="1" fill="#4a9eff" opacity=".6"/>
+    <rect x="12" y="22" width="20" height="2" rx="1" fill="#4a9eff" opacity=".4"/>
+    <rect x="12" y="26" width="26" height="2" rx="1" fill="#4a9eff" opacity=".4"/>
+    <rect x="24" y="40" width="8" height="6" rx="1" fill="#0d3f7a"/>
+    <rect x="18" y="46" width="20" height="2" rx="1" fill="#0d3f7a"/>
+  </svg>`,
+  cpu: `<svg viewBox="0 0 56 56" xmlns="http://www.w3.org/2000/svg">
+    <rect width="56" height="56" fill="#e8f1fd"/>
+    <rect x="12" y="12" width="32" height="32" rx="3" fill="#0d3f7a"/>
+    <rect x="15" y="15" width="26" height="26" rx="2" fill="#1a6fd4"/>
+    <rect x="18" y="18" width="20" height="20" rx="1" fill="#0d3f7a"/>
+    <rect x="20" y="20" width="16" height="16" rx="1" fill="#1a2540"/>
+    <text x="28" y="31" font-size="7" fill="#4a9eff" text-anchor="middle" font-family="monospace">CPU</text>
+    <rect x="8" y="20" width="4" height="2" rx="1" fill="#0d3f7a"/>
+    <rect x="8" y="25" width="4" height="2" rx="1" fill="#0d3f7a"/>
+    <rect x="8" y="30" width="4" height="2" rx="1" fill="#0d3f7a"/>
+    <rect x="44" y="20" width="4" height="2" rx="1" fill="#0d3f7a"/>
+    <rect x="44" y="25" width="4" height="2" rx="1" fill="#0d3f7a"/>
+    <rect x="44" y="30" width="4" height="2" rx="1" fill="#0d3f7a"/>
+    <rect x="20" y="8" width="2" height="4" rx="1" fill="#0d3f7a"/>
+    <rect x="25" y="8" width="2" height="4" rx="1" fill="#0d3f7a"/>
+    <rect x="30" y="8" width="2" height="4" rx="1" fill="#0d3f7a"/>
+    <rect x="20" y="44" width="2" height="4" rx="1" fill="#0d3f7a"/>
+    <rect x="25" y="44" width="2" height="4" rx="1" fill="#0d3f7a"/>
+    <rect x="30" y="44" width="2" height="4" rx="1" fill="#0d3f7a"/>
+  </svg>`,
+  ssd: `<svg viewBox="0 0 56 56" xmlns="http://www.w3.org/2000/svg">
+    <rect width="56" height="56" fill="#e8f1fd"/>
+    <rect x="6" y="14" width="44" height="28" rx="3" fill="#0d3f7a"/>
+    <rect x="8" y="16" width="40" height="24" rx="2" fill="#1a2540"/>
+    <rect x="10" y="18" width="24" height="20" rx="1" fill="#1a6fd4" opacity=".2"/>
+    <rect x="12" y="20" width="8" height="8" rx="1" fill="#1a6fd4"/>
+    <rect x="22" y="20" width="8" height="8" rx="1" fill="#0d3f7a"/>
+    <rect x="12" y="30" width="18" height="2" rx="1" fill="#4a9eff" opacity=".5"/>
+    <rect x="12" y="34" width="12" height="2" rx="1" fill="#4a9eff" opacity=".3"/>
+    <rect x="36" y="20" width="10" height="4" rx="1" fill="#4a9eff" opacity=".6"/>
+    <rect x="36" y="26" width="10" height="4" rx="1" fill="#4a9eff" opacity=".4"/>
+    <rect x="36" y="32" width="10" height="4" rx="1" fill="#4a9eff" opacity=".3"/>
+    <text x="16" y="27" font-size="5" fill="#fff" text-anchor="middle" font-family="monospace">SSD</text>
+  </svg>`,
+  headset: `<svg viewBox="0 0 56 56" xmlns="http://www.w3.org/2000/svg">
+    <rect width="56" height="56" fill="#e8f1fd"/>
+    <path d="M14 30 Q14 12 28 12 Q42 12 42 30" fill="none" stroke="#1a6fd4" stroke-width="4" stroke-linecap="round"/>
+    <rect x="8" y="28" width="10" height="14" rx="4" fill="#1a6fd4"/>
+    <rect x="38" y="28" width="10" height="14" rx="4" fill="#1a6fd4"/>
+    <rect x="9" y="30" width="8" height="10" rx="3" fill="#0d3f7a"/>
+    <rect x="39" y="30" width="8" height="10" rx="3" fill="#0d3f7a"/>
+    <rect x="26" y="42" width="8" height="3" rx="1" fill="#0d3f7a"/>
+    <circle cx="28" cy="46" r="2" fill="#1a6fd4"/>
+  </svg>`,
+  mouse2: `<svg viewBox="0 0 56 56" xmlns="http://www.w3.org/2000/svg">
+    <rect width="56" height="56" fill="#e8f1fd"/>
+    <ellipse cx="28" cy="30" rx="13" ry="17" fill="#1a2540"/>
+    <ellipse cx="28" cy="24" rx="13" ry="11" fill="#1a6fd4"/>
+    <line x1="28" y1="14" x2="28" y2="33" stroke="#4a9eff" stroke-width="1.5"/>
+    <circle cx="28" cy="19" r="3" fill="#4a9eff" opacity=".7"/>
+    <rect x="20" y="36" width="16" height="4" rx="2" fill="#0d3f7a"/>
+    <circle cx="34" cy="22" r="3" fill="#e8392a"/>
+  </svg>`,
+  monitor2: `<svg viewBox="0 0 56 56" xmlns="http://www.w3.org/2000/svg">
+    <rect width="56" height="56" fill="#e8f1fd"/>
+    <path d="M4 10 Q4 8 6 8 L50 8 Q52 8 52 10 L52 38 Q52 40 50 40 L6 40 Q4 40 4 38 Z" fill="#0d3f7a"/>
+    <rect x="6" y="10" width="44" height="28" rx="1" fill="#1a2540"/>
+    <rect x="7" y="11" width="42" height="26" fill="#0a1020"/>
+    <rect x="10" y="14" width="36" height="6" rx="1" fill="#1a6fd4" opacity=".4"/>
+    <rect x="10" y="22" width="24" height="3" rx="1" fill="#4a9eff" opacity=".5"/>
+    <rect x="10" y="27" width="30" height="3" rx="1" fill="#4a9eff" opacity=".3"/>
+    <rect x="10" y="32" width="18" height="3" rx="1" fill="#4a9eff" opacity=".3"/>
+    <rect x="22" y="40" width="12" height="5" rx="1" fill="#0d3f7a"/>
+    <rect x="16" y="45" width="24" height="2" rx="1" fill="#0d3f7a"/>
+    <circle cx="46" cy="38" r="1.5" fill="#4a9eff" opacity=".8"/>
+  </svg>`,
+  keyboard2: `<svg viewBox="0 0 56 56" xmlns="http://www.w3.org/2000/svg">
+    <rect width="56" height="56" fill="#e8f1fd"/>
+    <rect x="6" y="18" width="44" height="22" rx="3" fill="#1a2540"/>
+    <rect x="8" y="20" width="40" height="18" rx="2" fill="#0d3f7a"/>
+    <rect x="10" y="22" width="4" height="3" rx="1" fill="#4a9eff"/>
+    <rect x="16" y="22" width="4" height="3" rx="1" fill="#4a9eff"/>
+    <rect x="22" y="22" width="4" height="3" rx="1" fill="#4a9eff"/>
+    <rect x="28" y="22" width="4" height="3" rx="1" fill="#4a9eff"/>
+    <rect x="34" y="22" width="4" height="3" rx="1" fill="#4a9eff"/>
+    <rect x="40" y="22" width="6" height="3" rx="1" fill="#e8392a"/>
+    <rect x="10" y="27" width="4" height="3" rx="1" fill="#4a9eff"/>
+    <rect x="16" y="27" width="4" height="3" rx="1" fill="#4a9eff"/>
+    <rect x="22" y="27" width="4" height="3" rx="1" fill="#4a9eff"/>
+    <rect x="28" y="27" width="4" height="3" rx="1" fill="#4a9eff"/>
+    <rect x="34" y="27" width="4" height="3" rx="1" fill="#4a9eff"/>
+    <rect x="40" y="27" width="6" height="3" rx="1" fill="#4a9eff"/>
+    <rect x="13" y="32" width="30" height="3" rx="1" fill="#4a9eff"/>
+  </svg>`,
+  combo: `<svg viewBox="0 0 56 56" xmlns="http://www.w3.org/2000/svg">
+    <rect width="56" height="56" fill="#e8f1fd"/>
+    <rect x="10" y="8" width="36" height="30" rx="3" fill="#0d3f7a"/>
+    <rect x="12" y="10" width="32" height="26" rx="2" fill="#1a2540"/>
+    <rect x="14" y="12" width="12" height="12" rx="1" fill="#1a6fd4" opacity=".5"/>
+    <rect x="28" y="12" width="14" height="5" rx="1" fill="#4a9eff" opacity=".4"/>
+    <rect x="28" y="19" width="14" height="5" rx="1" fill="#4a9eff" opacity=".3"/>
+    <text x="20" y="21" font-size="5" fill="#4a9eff" text-anchor="middle" font-family="monospace">i9</text>
+    <rect x="6" y="38" width="44" height="12" rx="2" fill="#1a6fd4"/>
+    <rect x="8" y="40" width="8" height="4" rx="1" fill="#0d3f7a" opacity=".6"/>
+    <rect x="18" y="40" width="8" height="4" rx="1" fill="#0d3f7a" opacity=".6"/>
+    <rect x="28" y="40" width="8" height="4" rx="1" fill="#0d3f7a" opacity=".6"/>
+    <rect x="38" y="40" width="8" height="4" rx="1" fill="#0d3f7a" opacity=".6"/>
+    <text x="28" y="47" font-size="4" fill="#fff" text-anchor="middle" font-family="sans-serif">MAIN BOARD</text>
+  </svg>`,
+  headset2: `<svg viewBox="0 0 56 56" xmlns="http://www.w3.org/2000/svg">
+    <rect width="56" height="56" fill="#e8f1fd"/>
+    <path d="M12 32 Q12 10 28 10 Q44 10 44 32" fill="none" stroke="#1a6fd4" stroke-width="5" stroke-linecap="round"/>
+    <rect x="6" y="30" width="12" height="16" rx="5" fill="#1a6fd4"/>
+    <rect x="38" y="30" width="12" height="16" rx="5" fill="#1a6fd4"/>
+    <rect x="7" y="32" width="10" height="12" rx="4" fill="#0d3f7a"/>
+    <rect x="39" y="32" width="10" height="12" rx="4" fill="#0d3f7a"/>
+    <rect x="25" y="44" width="10" height="3" rx="1" fill="#0d3f7a"/>
+    <circle cx="30" cy="48" r="2.5" fill="#4a9eff"/>
+    <circle cx="12" cy="36" r="3" fill="#4a9eff" opacity=".5"/>
+    <circle cx="44" cy="36" r="3" fill="#4a9eff" opacity=".5"/>
+  </svg>`
+};
+
+const SVG_MAP = {
+  1:'gpu', 2:'mouse', 3:'keyboard', 4:'monitor', 5:'cpu',
+  6:'ssd', 7:'headset', 8:'mouse2', 9:'monitor2', 10:'keyboard2',
+  11:'combo', 12:'headset2'
+};
+
+function getSVG(id, size=56){
+  const key = SVG_MAP[id] || 'cpu';
+  const s = SVGS[key];
+  if(size === 56) return s;
+  return s.replace('viewBox="0 0 56 56"', `viewBox="0 0 56 56" width="${size}" height="${size}"`);
+}
+
+const products = [
+  {id:1,cat:'그래픽카드',title:'NVIDIA RTX 4080 SUPER 16GB 갤럭시 OC 그래픽카드',price:850000,nego:true,sold:false,condition:'상태 좋음',seller:'GPU마스터',loc:'서울 강남구',time:'10분 전',views:318,likes:24,desc:'RTX 4080 SUPER 16GB 갤럭시 OC 에디션입니다.\n구매 후 8개월 사용, 게임 전용으로 사용했습니다. 채굴 절대 없습니다.\n3DMark 점수 정상, 발열 이상 없음, 외관 스크래치 없음.\n박스 및 포장재 완전 보관 중입니다.\n직거래 선호, 택배도 가능 (안전결제 이용).'},
+  {id:2,cat:'마우스',title:'로지텍 G Pro X Superlight 2 DEX 무선 마우스 (블랙)',price:95000,nego:false,sold:false,condition:'거의 새것',seller:'마우스짱',loc:'경기 성남시',time:'35분 전',views:201,likes:41,desc:'로지텍 G Pro X Superlight 2 DEX 블랙 색상입니다.\n구매 후 2주 사용 후 다른 마우스로 교체하여 판매합니다.\n상태 매우 좋음. 스크래치 없음. 정품 수령증 있음.\n포장 박스 보관 중. 충전 케이블 포함.\n택배 거래 가능 (안전결제 이용).'},
+  {id:3,cat:'키보드',title:'한성컴퓨터 GK898B 풀배열 기계식 키보드 청축',price:45000,nego:true,sold:false,condition:'상태 좋음',seller:'키보드수집가',loc:'서울 마포구',time:'1시간 전',views:87,likes:12,desc:'한성 GK898B 청축 풀배열 기계식 키보드입니다.\n6개월 사용, 키캡 상태 양호합니다.\n키캡 제거 흔적 없음. 스페이스바 소리 정상.\n박스 있음. 직거래 강남 삼성역 근처 가능.'},
+  {id:4,cat:'모니터',title:'LG 27GP850-B 27인치 IPS Nano 144Hz 게이밍 모니터',price:320000,nego:true,sold:false,condition:'상태 좋음',seller:'모니터박사',loc:'인천 연수구',time:'2시간 전',views:156,likes:29,desc:'LG 27GP850-B 27인치 IPS 게이밍 모니터입니다.\n1년 3개월 사용. 패널 불량화소 없음.\nHDMI, DisplayPort 케이블 포함.\n높이 조절 스탠드 정상 작동.\n택배 시 별도 박스 포장비 5,000원.'},
+  {id:5,cat:'CPU/메인보드',title:'AMD Ryzen 9 7900X 정품 박스 + 박스 쿨러 미사용',price:270000,nego:false,sold:false,condition:'거의 새것',seller:'CPU덕후',loc:'부산 해운대구',time:'3시간 전',views:244,likes:38,desc:'AMD Ryzen 9 7900X 정품 박스 구성입니다.\n5개월 사용 후 업그레이드로 판매합니다.\n화이트스푸너 쿨러 사용으로 박스 쿨러는 미사용 상태.\nCPU 정상 부팅, 발열 이상 없음.\n택배 가능. 안전결제 우대.'},
+  {id:6,cat:'메모리/SSD',title:'삼성 990 PRO 2TB NVMe SSD (PCIe 4.0) 방열판 포함',price:130000,nego:true,sold:true,condition:'상태 좋음',seller:'저장장치왕',loc:'대구 달서구',time:'5시간 전',views:178,likes:15,desc:'삼성 990 PRO 2TB NVMe SSD입니다.\n10개월 사용. TBW 20TB 이하 (헬스 체크 사진 제공 가능).\nPS5 사용 불가. PC 전용.'},
+  {id:7,cat:'헤드셋',title:'소니 WH-1000XM5 노이즈캔슬링 블루투스 헤드폰 블랙',price:220000,nego:true,sold:false,condition:'상태 좋음',seller:'오디오맨',loc:'서울 송파구',time:'6시간 전',views:132,likes:33,desc:'소니 WH-1000XM5 블랙 헤드폰입니다.\n노이즈캔슬링 정상, 배터리 약 28시간 유지.\n케이스, 케이블, 박스 모두 있음.\n이어패드 새것으로 교체 완료.'},
+  {id:8,cat:'마우스',title:'레이저 DeathAdder V3 HyperSpeed 무선 게이밍 마우스',price:78000,nego:false,sold:false,condition:'거의 새것',seller:'게이머123',loc:'경기 수원시',time:'8시간 전',views:94,likes:19,desc:'레이저 DeathAdder V3 HyperSpeed 무선 마우스입니다.\n구매 후 1달 사용하고 유선으로 교체하여 판매.\n수신기 포함, 배터리 완충.\n직거래 수원 근처 가능.'},
+  {id:9,cat:'모니터',title:'삼성 오디세이 G7 32인치 240Hz QHD 커브드 게이밍 모니터',price:480000,nego:true,sold:false,condition:'상태 좋음',seller:'게이밍룸',loc:'서울 강동구',time:'어제',views:267,likes:52,desc:'삼성 오디세이 G7 32인치 240Hz QHD 커브드 게이밍 모니터.\n1년 2개월 사용. 불량화소 없음. 밝기 정상.\nDisplayPort 케이블 포함.'},
+  {id:10,cat:'키보드',title:'HHKB Professional HYBRID Type-S 영문 배열 (묵음축)',price:350000,nego:false,sold:false,condition:'거의 새것',seller:'개발자K',loc:'서울 마포구',time:'어제',views:89,likes:27,desc:'HHKB Professional HYBRID Type-S 영문 배열입니다.\n개발용으로 3개월 사용. 묵음축 특성상 타건음 거의 없음.\nBluetooth 4연결 + USB-C. 박스, 키캡 풀러, 설명서 완비.'},
+  {id:11,cat:'CPU/메인보드',title:'인텔 Core i9-14900K + ASUS ROG STRIX Z790-F 메인보드 콤보',price:620000,nego:true,sold:false,condition:'상태 좋음',seller:'인텔파워',loc:'경기 의정부시',time:'2일 전',views:198,likes:44,desc:'인텔 i9-14900K + ASUS ROG STRIX Z790-F 보드 콤보 판매.\n4개월 사용. OC 없이 기본 클럭 사용.\nCPU 쿨러 미포함. 직거래 의정부 가능.'},
+  {id:12,cat:'헤드셋',title:'스틸시리즈 Arctis Nova Pro Wireless 헤드셋 + GameDAC Gen2',price:310000,nego:true,sold:false,condition:'상태 좋음',seller:'사운드왕',loc:'서울 동작구',time:'3일 전',views:145,likes:31,desc:'스틸시리즈 Arctis Nova Pro Wireless + GameDAC Gen2 세트.\n2in1 배터리 시스템, 노이즈캔슬링 마이크.\n6개월 사용. 게임/음악 모두 우수한 성능.'}
+];
+
+const chats = [
+  {id:1,name:'GPU마스터',init:'G',prod:'RTX 4080 SUPER',price:'850,000원',prodId:1,unread:2,msgs:[
+    {me:false,text:'안녕하세요! RTX 4080 SUPER 아직 판매 중인가요?',time:'오후 2:30'},
+    {me:true,text:'네, 판매중입니다! 어디서 직거래 원하세요?',time:'오후 2:32'},
+    {me:false,text:'강남역 근처에서 가능할까요?',time:'오후 2:33'},
+    {me:true,text:'좋아요! 언제 가능하신가요?',time:'오후 2:35'},
+    {me:false,text:'이번 주 토요일 오후 2시 어떠세요?',time:'오후 2:36'}
+  ]},
+  {id:2,name:'마우스짱',init:'M',prod:'로지텍 G Pro X',price:'95,000원',prodId:2,unread:1,msgs:[
+    {me:false,text:'배송비 포함인가요?',time:'오전 11:10'},
+    {me:true,text:'택배 거래 시 배송비는 구매자 부담입니다 😊',time:'오전 11:20'},
+    {me:false,text:'네 알겠습니다! 안전결제로 진행 가능할까요?',time:'오전 11:22'}
+  ]},
+  {id:3,name:'개발자K',init:'K',prod:'HHKB Type-S',price:'350,000원',prodId:10,unread:0,msgs:[
+    {me:false,text:'스위치 교체 이력 있나요?',time:'어제'},
+    {me:true,text:'스위치 교체 없습니다. 순정 묵음축 그대로예요.',time:'어제'},
+    {me:false,text:'감사합니다!',time:'어제'}
+  ]}
+];
+
+const notices = [
+  {icon:'💬',text:'<strong>GPU마스터</strong>님이 채팅을 보냈습니다: "이번 주 토요일 오후 2시 어떠세요?"',time:'5분 전',unread:true},
+  {icon:'❤️',text:'<strong>게이머123</strong>님이 <strong>RTX 4080 SUPER</strong>를 관심 목록에 추가했습니다.',time:'18분 전',unread:true},
+  {icon:'🔔',text:'관심 목록에 추가한 <strong>소니 WH-1000XM5</strong>의 가격이 20,000원 내려갔습니다.',time:'1시간 전',unread:true},
+  {icon:'⭐',text:'<strong>마우스짱</strong>님이 후기를 남겼습니다: "빠른 배송 감사합니다!"',time:'3시간 전',unread:false},
+  {icon:'📢',text:'[공지] 사기 예방을 위해 안전결제를 이용해주세요.',time:'어제',unread:false}
+];
+
+let wishSet = new Set([1,7]);
+let curChat = 1;
+let curProds = [...products];
+
+function thumbEl(id, size=56){ return `<div class="thumb" style="width:${size}px;height:${size}px">${getSVG(id,size)}</div>`; }
+
+function rowHTML(p){
+  return `<div class="tr" onclick="openDetail(${p.id})">
+    ${thumbEl(p.id)}
+    <div class="ii">
+      <div class="it">${p.title}</div>
+      <div class="itags">
+        ${p.sold?'<span class="tag ts">거래완료</span>':'<span class="tag tn">판매중</span>'}
+        <span class="tag tu">${p.condition}</span>
+        ${p.nego?'<span class="tag tng">협의가능</span>':''}
+      </div>
+    </div>
+    <div class="sc2"><div class="sn">${p.seller}</div><div class="sloc">📍 ${p.loc}</div></div>
+    <div class="pc">${p.price.toLocaleString()}원${p.nego?`<div class="pn">협의가능</div>`:''}</div>
+    <div class="vc">👁 ${p.views}</div>
+    <div class="tc">${p.time}</div>
+  </div>`;
+}
+
+function renderList(list){
+  document.getElementById('cnt').textContent = list.length;
+  document.getElementById('plist').innerHTML = !list.length
+    ? `<div class="em"><div class="em-ic">🔍</div><p>검색 결과가 없습니다.</p></div>`
+    : list.map(rowHTML).join('');
+}
+
+function openDetail(id){
+  const p = products.find(x=>x.id===id); if(!p) return;
+  document.getElementById('dcon').innerHTML = `
+    <div class="bc">홈 > <span>${p.cat}</span> > ${p.title.slice(0,28)}...</div>
+    <div class="dl">
+      <div class="dim">
+        <div class="dmi">${getSVG(p.id)}</div>
+        <div class="dts">
+          ${[0,1,2].map((i)=>`<div class="dt ${i===0?'active':''}">${getSVG(p.id,56)}</div>`).join('')}
+        </div>
+      </div>
+      <div class="dinf">
+        <div class="dst">
+          <span class="dsb ${p.sold?'dsd':'dss'}">${p.sold?'거래완료':'판매중'}</span>
+          <span style="font-size:11px;color:var(--td)">${p.cat}</span>
+        </div>
+        <div class="dth">${p.title}</div>
+        <div class="dpr">
+          <div class="dp">${p.price.toLocaleString()}원</div>
+          ${p.nego?'<span class="dng">가격 협의 가능</span>':''}
+        </div>
+        <table class="dmt">
+          <tr><td>상품 상태</td><td>${p.condition}</td></tr>
+          <tr><td>거래 지역</td><td>${p.loc}</td></tr>
+          <tr><td>조회수</td><td>👁 ${p.views}회</td></tr>
+          <tr><td>관심</td><td>❤️ ${p.likes}명</td></tr>
+          <tr><td>등록일</td><td>${p.time}</td></tr>
+        </table>
+        <div class="dsb2">
+          <div class="sav">${p.seller[0]}</div>
+          <div>
+            <div class="snm">${p.seller}</div>
+            <div class="sst">📍 ${p.loc}</div>
+            <div class="sr">⭐⭐⭐⭐⭐ 4.9</div>
+          </div>
+          <button class="btn bo" style="margin-left:auto;font-size:11px" onclick="toast('판매자 프로필')">프로필 보기</button>
+        </div>
+        <div class="dde">${p.desc.replace(/\n/g,'<br>')}</div>
+        <div class="dac">
+          <button class="bwb" onclick="toggleWish(${p.id},this)">${wishSet.has(p.id)?'❤️':'🤍'}</button>
+          <button class="bcb" onclick="${p.sold?"toast('이미 거래완료된 상품입니다')":`nav('chat')`}">${p.sold?'거래완료':'💬 채팅하기'}</button>
+        </div>
+      </div>
+    </div>`;
+  nav('detail');
+}
+
+function renderChatList(){
+  document.getElementById('clist').innerHTML = chats.map(c=>`
+    <div class="ci ${c.id===curChat?'active':''}" onclick="selChat(${c.id})">
+      <div class="cav">${c.init}</div>
+      <div class="cnf"><div class="cnm">${c.name}</div><div class="cpv">${c.msgs[c.msgs.length-1].text}</div></div>
+      <div style="display:flex;flex-direction:column;align-items:flex-end;gap:4px">
+        <div class="ctm">${c.msgs[c.msgs.length-1].time}</div>
+        ${c.unread?`<div class="cud">${c.unread}</div>`:''}
+      </div>
+    </div>`).join('');
+}
+
+function selChat(id){
+  curChat=id;
+  const c=chats.find(x=>x.id===id); c.unread=0;
+  renderChatList();
+  const p=products.find(x=>x.id===c.prodId);
+  document.getElementById('crh').innerHTML = `
+    <div class="cpt">${p?getSVG(p.id,38):''}</div>
+    <div><div class="cpn">${c.prod}</div><div class="cpp">${c.price}</div></div>
+    <button class="btn bo" style="margin-left:auto;font-size:11px" onclick="toast('신고')">신고</button>`;
+  renderMsgs(c);
+}
+
+function renderMsgs(c){
+  const el=document.getElementById('cmsgs');
+  el.innerHTML=c.msgs.map(m=>`
+    <div class="msg ${m.me?'me':''}">
+      ${!m.me?`<div class="mav">${c.init}</div>`:''}
+      <div class="mb">${m.text}</div>
+      <div class="mt">${m.time}</div>
+    </div>`).join('');
+  el.scrollTop=el.scrollHeight;
+}
+
+function sendMsg(){
+  const el=document.getElementById('cinput');
+  const t=el.value.trim(); if(!t) return;
+  const c=chats.find(x=>x.id===curChat);
+  c.msgs.push({me:true,text:t,time:'방금'});
+  renderMsgs(c); renderChatList(); el.value='';
+  setTimeout(()=>{c.msgs.push({me:false,text:'확인했습니다! 잠시 후 답변 드릴게요 😊',time:'방금'});renderMsgs(c);},1000);
+}
+
+function renderNotices(){
+  document.getElementById('notel').innerHTML=
+    `<div class="nhh">🔔 알림</div>`+
+    notices.map(n=>`<div class="nti ${n.unread?'unread':''}" onclick="this.classList.remove('unread')">
+      <div class="nic">${n.icon}</div>
+      <div class="ntx">${n.text}</div>
+      <div class="ntm">${n.time}</div>
+    </div>`).join('');
+}
+
+function renderWish(){
+  const items=products.filter(p=>wishSet.has(p.id));
+  document.getElementById('wlist').innerHTML=!items.length
+    ?`<div class="em"><div class="em-ic">🤍</div><p>관심 목록이 비어있습니다.</p></div>`
+    :items.map(rowHTML).join('');
+}
+
+function renderProfile(){
+  document.getElementById('prolist').innerHTML=products.slice(0,5).map(rowHTML).join('');
+}
+
+function renderHot(){
+  const hot=[...products].sort((a,b)=>b.likes-a.likes).slice(0,5);
+  document.getElementById('hotl').innerHTML=hot.map(p=>`
+    <div class="hi" onclick="openDetail(${p.id})">
+      <div class="ht">${getSVG(p.id,36)}</div>
+      <div class="hin"><div class="hnm">${p.title.slice(0,16)}...</div><div class="hpr">${p.price.toLocaleString()}원</div></div>
+    </div>`).join('');
+}
+
+function toggleWish(id,btn){
+  if(wishSet.has(id)){wishSet.delete(id);btn.textContent='🤍';toast('관심 목록에서 제거했습니다');}
+  else{wishSet.add(id);btn.textContent='❤️';toast('❤️ 관심 목록에 추가했습니다!');}
+  renderWish();
+}
+
+function nav(page){
+  document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
+  document.getElementById('page-'+page).classList.add('active');
+  if(page==='chat') selChat(curChat);
+  if(page==='notice') renderNotices();
+}
+
+function setNav(el){document.querySelectorAll('.nv').forEach(n=>n.classList.remove('active'));el.classList.add('active');}
+function setSA(el){document.querySelectorAll('.sl').forEach(s=>s.classList.remove('active'));el.classList.add('active');}
+function setTab(el){document.querySelectorAll('.tb2').forEach(t=>t.classList.remove('active'));el.classList.add('active');}
+
+function filterCat(cat){
+  nav('home');
+  curProds=cat==='전체'?[...products]:products.filter(p=>p.cat===cat);
+  renderList(curProds);
+}
+
+function search(q){
+  if(!q.trim()){renderList(products);return;}
+  renderList(products.filter(p=>p.title.toLowerCase().includes(q.toLowerCase())||p.cat.includes(q)||p.seller.includes(q)));
+  nav('home');
+}
+
+function sort(v){
+  let l=[...curProds];
+  if(v==='pa') l.sort((a,b)=>a.price-b.price);
+  else if(v==='pd') l.sort((a,b)=>b.price-a.price);
+  else if(v==='v') l.sort((a,b)=>b.views-a.views);
+  renderList(l);
+}
+
+function doSell(){
+  const t=document.getElementById('stitle').value;
+  const pr=document.getElementById('sprice').value;
+  const d=document.getElementById('sdesc').value;
+  if(!t||!pr||!d){toast('⚠️ 필수 항목을 모두 입력해주세요');return;}
+  const id=products.length+1;
+  const np={id,cat:'기타',title:t,price:parseInt(pr),nego:document.getElementById('snego').checked,sold:false,condition:'상태 좋음',seller:'나',loc:'서울',time:'방금',views:0,likes:0,desc:d};
+  products.unshift(np); SVG_MAP[id]='cpu'; curProds=[...products];
+  renderList(curProds); toast('✅ 판매글이 등록되었습니다!'); nav('home');
+}
+
+function openLogin(){document.getElementById('lmodal').classList.add('open');}
+function closeLogin(){document.getElementById('lmodal').classList.remove('open');}
+function setMT(el,id){
+  document.querySelectorAll('.mt2').forEach(t=>t.classList.remove('active'));el.classList.add('active');
+  document.getElementById('ml').style.display=id==='ml'?'block':'none';
+  document.getElementById('ms').style.display=id==='ms'?'block':'none';
+}
+function doLogin(){closeLogin();toast('✅ 로그인 되었습니다!');}
+
+let toastT;
+function toast(msg){const el=document.getElementById('toastel');el.textContent=msg;el.classList.add('show');clearTimeout(toastT);toastT=setTimeout(()=>el.classList.remove('show'),2500);}
+
+renderList(products);
+renderChatList();
+renderWish();
+renderProfile();
+renderHot();
+</script>
+</body>
+</html>
